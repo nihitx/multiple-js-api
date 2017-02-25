@@ -6,10 +6,10 @@ function AppViewModel() {
 
   self.getJSON = () => {
       $.ajax({
-          type: 'POST',
-          url: 'https://loanersclub.herokuapp.com/index.php/api' ,
+          type: 'GET',
+          url: 'https://iot-backend-metropolia.herokuapp.com/api/user',
           contentType: 'application/json; charset=utf-8',
-          dataType: "json",
+          dataType: 'json',
       })
       .done(function(result) {
           console.log(result);
