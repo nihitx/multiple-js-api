@@ -7,7 +7,7 @@ function AppViewModel() {
   self.getJSON = () => {
       $.ajax({
           type: 'POST',
-          url: 'https://loanersclub.herokuapp.com/index.php/moneyexchange/NewMoneyExchangeData/' ,
+          url: 'https://loanersclub.herokuapp.com/index.php/api' ,
           contentType: 'application/json; charset=utf-8',
           dataType: "json",
       })
