@@ -9,12 +9,6 @@ var app = express();
 
 app.use(express.static(publicPath));
 
-var cors = require('cors');
-
-// use it before all route definitions
-app.use(cors());
-
-
 app.listen(port, () => {
   console.log(`Server is up on ${port}`);
 });
