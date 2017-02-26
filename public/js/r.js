@@ -64,7 +64,7 @@ var Heading = React.createClass({
                 <hr />
                 { this.state.showtable ? <TableView data={this.state.data} state={this.state.showtable}/> : null }
                 <hr />
-                <a type="submit" className="btn btn-success" href="/react.html">React</a>
+                <a type="submit" className="btn btn-success" href="/">Knockout</a>
                 <a type="submit" className="btn btn-success" href="/react.html">React</a>
                 <a type="submit" className="btn btn-success" href="/angular.html">Angular</a>
             </div>
