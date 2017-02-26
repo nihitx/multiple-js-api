@@ -56,7 +56,6 @@ var Heading = React.createClass({
                 <input type="text" className="form-control" placeholder="Amount" value={amount} onChange={this.handleChange} />
               </div>
               <p>APR : </p>
-              <p>Nominal: </p>
               <p>FirstMonth : {firstMonth} </p>
               <p>Total : {totalA}</p>
                 <div className="form-group">
