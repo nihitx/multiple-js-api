@@ -10,7 +10,7 @@ function AppViewModel() {
     var x = {"amount" : self.amount()};
       $.ajax({
           type: 'GET',
-          url: 'http://localhost:3000/getIOT',
+          url: 'https://gentle-oasis-93873.herokuapp.com/getIOT',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
