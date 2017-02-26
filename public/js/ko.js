@@ -1,10 +1,11 @@
 function AppViewModel() {
   var self = this;
-  self.amount = ko.observable(null);
+  self.amount = ko.observable(1000);
   self.email = ko.observable(null);
   self.password = ko.observable(null);
   self.paymentPlan = ko.observableArray();
-  self.firstMonth = ko.observable();
+  self.firstMonth = ko.observable(0.00);
+  self.paymentPlanCame = ko.observable(false);
 
   self.information = function() {
     var x = {"amount" : self.amount()};
@@ -22,6 +23,7 @@ function AppViewModel() {
                 });
         console.log(self.paymentPlan());
         self.firstMonth(self.paymentPlan()[0].total_payment_with_fee);
+        self.paymentPlanCame(true);
       })
       .fail(function(xhr, status, error) {
           console.log(error);
@@ -29,6 +31,14 @@ function AppViewModel() {
       .always(function(data){
       });
   }
+
+  self.totalAmount = ko.computed(function() {
+            var sum = 0;
+            $.each(self.paymentPlan(), function (index, plan) {
+                 sum += parseFloat(plan.total_payment_with_fee);
+            });
+            return sum.toFixed(2);
+        });
 }
     $(document).ready(function () {
         $.ajaxSetup({ cache: false });

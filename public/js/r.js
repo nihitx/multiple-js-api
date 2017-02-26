@@ -4,7 +4,8 @@ var Heading = React.createClass({
         data : [],
          amount : 1000,
          firstMonth : 0,
-         showtable : false
+         showtable : false,
+         totalA : 0
       };
   },
   handleChange: function(event){
@@ -28,6 +29,11 @@ var Heading = React.createClass({
              firstMonth : responseData[1].total_payment_with_fee,
              showtable : true
            });
+           var totalAmount = 0;
+           Object.keys(this.state.data).map((key,i)=>{
+             totalAmount = parseFloat(totalAmount) +  parseFloat(this.state.data[key].total_payment_with_fee);
+           });
+           this.setState({totalA : totalAmount})
         })
         .catch(function(err){
          console.log(err);
@@ -39,6 +45,7 @@ var Heading = React.createClass({
     render : function(){
       var amount = this.state.amount;
       var firstMonth = this.state.firstMonth;
+      var totalA = this.state.totalA;
       return(
         <div className="container">
           <div className="row">
@@ -51,7 +58,7 @@ var Heading = React.createClass({
               <p>APR : </p>
               <p>Nominal: </p>
               <p>FirstMonth : {firstMonth} </p>
-              <p>Total : </p>
+              <p>Total : {totalA}</p>
                 <div className="form-group">
                   <label >Email address</label>
                   <input type="email" className="form-control" placeholder="Email" />
@@ -66,7 +73,6 @@ var Heading = React.createClass({
                 <hr />
                 <a type="submit" className="btn btn-success" href="/">Knockout</a>
                 <a type="submit" className="btn btn-success" href="/react.html">React</a>
-                <a type="submit" className="btn btn-success" href="/angular.html">Angular</a>
             </div>
           </div>
         </div>
@@ -77,7 +83,7 @@ var Heading = React.createClass({
 var TableView = React.createClass({
     render: function() {
       Object.keys(this.props.data).map((key,i)=>{
-        console.log(this.props.data[key])
+        console.log(this.props.data[key]);
       });
       let data = this.props.data;
         return (

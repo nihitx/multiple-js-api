@@ -25,7 +25,7 @@
         <p>APR : </p>
         <p>Nominal: </p>
         <p>FirstMonth : <span data-bind="text : firstMonth"></span></p>
-        <p>Total : </p>
+        <p>Total : <span data-bind="text : totalAmount"> </p>
         <form>
           <div class="form-group">
             <label >Email address</label>
@@ -36,8 +36,31 @@
             <input type="password" class="form-control" placeholder="Password" data-bind="value : password">
           </div>
           <button type="submit" class="btn btn-success" data-bind="click : information">Submit</button>
+          <div data-bind="visible : paymentPlanCame() == true">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>capital payment</th>
+                  <th>duedate</th>
+                  <th>interest payment</th>
+                  <th>total payment</th>
+                  <th>total payment_with fee</th>
+                </tr>
+              </thead>
+              <tbody data-bind="foreach : paymentPlan">
+                <tr>
+                   <td class="text-center"><span data-bind="text : $data.capital_payment"></span></td>
+                   <td class="text-center"><span data-bind="text : $data.duedate"></span></td>
+                   <td class="text-center"><span data-bind="text : $data.interest_payment"></span></td>
+                   <td class="text-center"><span data-bind="text : $data.total_payment"></span></td>
+                   <td class="text-center"><span data-bind="text : $data.total_payment_with_fee"></span></td>
+               </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr>
           <a type="submit" class="btn btn-success" href="/react.html">React</a>
-          <a type="submit" class="btn btn-success" href="/angular.html">Angular</a>
+          <a type="submit" class="btn btn-success" href="/">Knockout</a>
         </form>
       </div>
     </div>
