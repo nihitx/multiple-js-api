@@ -10,24 +10,7 @@ var helmet = require('helmet');
 var https = require('https');
 
 var app = express();
-app.use(helmet())
-// app.use(cors({
-//     origin: ['http://localhost:3000'],
-//     credentials: true
-// }));
-
-app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'accept, content-type, x-parse-application-id, x-parse-rest-api-key, x-parse-session-token');
-     // intercept OPTIONS method
-    if ('OPTIONS' == req.method) {
-      res.send(200);
-    }
-    else {
-      next();
-    }
-});
+app.use(helmet());
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
@@ -39,15 +22,22 @@ app.use(cookieParser());
 app.use(express.static(publicPath));
 
 
-// app.get('/getIOT', function (req, res , err) {
-//   request({
-//             url: 'https://iot-backend-metropolia.herokuapp.com/api/user',
-//             method: 'GET'
-//         }, function (error, request, body) {
-//             return JSON.parse(body);
-//
-//         })
-// });
+app.get('/getIOT', function (req, res , err) {
+    var amount = req.query.amount;
+    request({
+      'auth': {
+          'user': 'masnad',
+          'pass': 'whatstodaysrate',
+          'sendImmediately': true
+      },
+      url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/getAuroraRate?Amount=${amount}`,
+      method: 'GET',
+    }, function (error, request, body) {
+      console.log(body);
+      return res.end(body);
+      })
+});
+
 
 
 app.listen(port, () => {
