@@ -8,7 +8,6 @@ var requestify = require('requestify');
 var request = require('request');
 var helmet = require('helmet');
 var https = require('https');
-
 var app = express();
 app.use(helmet());
 
@@ -18,9 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(express.static(publicPath));
-
 
 app.get('/getIOT', function (req, res , err) {
     var amount = req.query.amount;
@@ -37,8 +34,6 @@ app.get('/getIOT', function (req, res , err) {
       return res.end(body);
       })
 });
-
-
 
 app.listen(port, () => {
   console.log(`Server is up on ${port}`);

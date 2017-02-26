@@ -10,7 +10,7 @@ function AppViewModel() {
     var x = {"amount" : self.amount()};
       $.ajax({
           type: 'GET',
-          url: 'https://gentle-oasis-93873.herokuapp.com/getIOT',
+          url: 'http://localhost:3000/getIOT',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
@@ -29,10 +29,7 @@ function AppViewModel() {
       .always(function(data){
       });
   }
-
-
 }
-
     $(document).ready(function () {
         $.ajaxSetup({ cache: false });
         ko.applyBindings(new AppViewModel(), document.getElementById('KnockoutBind'));
