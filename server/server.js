@@ -19,17 +19,45 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(publicPath));
 
-app.get('/getIOT', function (req, res , err) {
+app.get('/getpaymentplan', function (req, res , err) {
     var amount = req.query.amount;
     request({
       'auth': {
           'user': 'masnad',
-          'pass': 'whatstodaysrate',
+          'pass': 'masnad',
           'sendImmediately': true
       },
       url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/getAuroraRate?Amount=${amount}`,
       method: 'GET',
     }, function (error, request, body) {
+      console.log(body);
+      return res.end(body);
+      })
+});
+
+app.get('/getstarted', function (req, res , err) {
+    var email = req.query.email;
+    var password = req.query.password;
+    var amount = req.query.amount;
+    var bodyInfo = {
+      "email" : email,
+      "password" : password,
+      "Borrowamount" : amount
+    };
+    console.log(bodyInfo);
+    request({
+      'auth': {
+          'user': 'masnad',
+          'pass': 'masnad',
+          'sendImmediately': true
+      },
+      url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/auroraxregister`,
+      method: 'POST',
+      body : JSON.stringify(bodyInfo),
+    }, function (error, request, body) {
+      if(error){
+        return console.log(error);
+      }
       console.log(body);
       return res.end(body);
       })

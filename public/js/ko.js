@@ -11,7 +11,7 @@ function AppViewModel() {
     var x = {"amount" : masnad.amount()};
       $.ajax({
           type: 'GET',
-          url: 'http://localhost:3000/getIOT',
+          url: 'http://localhost:3000/getpaymentplan',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
@@ -39,6 +39,30 @@ function AppViewModel() {
             });
             return sum.toFixed(2);
         });
+  masnad.getStarted = function() {
+    var x = {
+      "amount" : masnad.amount(),
+      "email" : masnad.email(),
+      "password" : masnad.password()
+    };
+      $.ajax({
+          type: 'GET',
+          url: 'http://localhost:3000/getstarted',
+          contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+          dataType: 'json',
+          data: x
+      })
+      .done(function(result) {
+        console.log(result);
+         return window.location.href = result;
+      })
+      .fail(function(xhr, status, error) {
+          console.log(error);
+      })
+      .always(function(data){
+      });
+  }
+
 }
     $(document).ready(function () {
         $.ajaxSetup({ cache: false });

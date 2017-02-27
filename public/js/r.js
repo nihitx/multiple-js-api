@@ -11,10 +11,6 @@ var Heading = React.createClass({
       };
   },
   handleChange: function(event){
-    // for multiple value we need to use refs
-    console.log(this.refs.email.value);
-    console.log(this.refs.password.value);
-    console.log(this.refs.amount.value);
     this.setState({
       amount : this.refs.amount.value,
       email : this.refs.email.value,
@@ -30,7 +26,7 @@ var Heading = React.createClass({
           'contentType' : 'application/x-www-form-urlencoded',
         },
       };
-        fetch(`http://localhost:3000/getIOT?amount=${amount}`, value)
+        fetch(`http://localhost:3000/getpaymentplan?amount=${amount}`, value)
         .then((response) => response.json())
         .then((responseData) =>{
           console.log(responseData);
@@ -48,6 +44,27 @@ var Heading = React.createClass({
         .catch(function(err){
          console.log(err);
       });
+    },
+    getStartedWithAurora : function(){
+      var amount = this.state.amount;
+      var email = this.state.email;
+      var password = this.state.password;
+      var value = {
+        method : 'GET' ,
+        headers : {
+          'Accept': 'application/json',
+          'contentType' : 'application/x-www-form-urlencoded',
+        },
+      };
+      fetch(`http://localhost:3000/getstarted?amount=${amount}&email=${email}&password={password}`, value)
+      .then((response) => response.json())
+      .then((responseData) =>{
+        console.log(responseData);
+         return window.location.href = responseData;
+      })
+      .catch(function(err){
+       console.log(err);
+    });
     },
     showTable : function(){
       this.setState({showtable : !this.state.showtable});
@@ -76,7 +93,8 @@ var Heading = React.createClass({
                   <label>Password</label>
                   <input type="password" className="form-control" ref="password" placeholder="Password" onChange={this.handleChange} />
                 </div>
-                <button type="submit" className="btn btn-success" onClick={this.loadCommentsFromServer} >Submit</button>
+                <button type="submit" className="btn btn-success" onClick={this.loadCommentsFromServer} >Check Plan</button>
+                <button type="submit" className="btn btn-success" onClick={this.getStartedWithAurora} >Get started</button>
                 <hr />
                 { this.state.showtable ? <TableView data={this.state.data} state={this.state.showtable}/> : null }
                 <hr />
