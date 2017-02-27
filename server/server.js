@@ -24,7 +24,7 @@ app.get('/getpaymentplan', function (req, res , err) {
     request({
       'auth': {
           'user': 'masnad',
-          'pass': 'masnad',
+          'pass': 'whatstodaysrate',
           'sendImmediately': true
       },
       url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/getAuroraRate?Amount=${amount}`,
@@ -48,7 +48,7 @@ app.get('/getstarted', function (req, res , err) {
     request({
       'auth': {
           'user': 'masnad',
-          'pass': 'masnad',
+          'pass': 'registertoaurorax',
           'sendImmediately': true
       },
       url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/auroraxregister`,

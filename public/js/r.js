@@ -26,7 +26,7 @@ var Heading = React.createClass({
           'contentType' : 'application/x-www-form-urlencoded',
         },
       };
-        fetch(`http://localhost:3000/getpaymentplan?amount=${amount}`, value)
+        fetch(`https://gentle-oasis-93873.herokuapp.com/getpaymentplan?amount=${amount}`, value)
         .then((response) => response.json())
         .then((responseData) =>{
           console.log(responseData);
@@ -56,7 +56,7 @@ var Heading = React.createClass({
           'contentType' : 'application/x-www-form-urlencoded',
         },
       };
-      fetch(`http://localhost:3000/getstarted?amount=${amount}&email=${email}&password={password}`, value)
+      fetch(`https://gentle-oasis-93873.herokuapp.com/getstarted?amount=${amount}&email=${email}&password={password}`, value)
       .then((response) => response.json())
       .then((responseData) =>{
         console.log(responseData);

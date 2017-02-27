@@ -11,7 +11,7 @@ function AppViewModel() {
     var x = {"amount" : masnad.amount()};
       $.ajax({
           type: 'GET',
-          url: 'http://localhost:3000/getpaymentplan',
+          url: 'https://gentle-oasis-93873.herokuapp.com/getpaymentplan',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
@@ -47,7 +47,7 @@ function AppViewModel() {
     };
       $.ajax({
           type: 'GET',
-          url: 'http://localhost:3000/getstarted',
+          url: 'https://gentle-oasis-93873.herokuapp.com/getstarted',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
