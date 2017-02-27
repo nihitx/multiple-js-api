@@ -5,11 +5,21 @@ var Heading = React.createClass({
          amount : 1000,
          firstMonth : 0,
          showtable : false,
-         totalA : 0
+         totalA : 0,
+         email: null,
+         password : null
       };
   },
   handleChange: function(event){
-    this.setState({amount : event.target.value});
+    // for multiple value we need to use refs
+    console.log(this.refs.email.value);
+    console.log(this.refs.password.value);
+    console.log(this.refs.amount.value);
+    this.setState({
+      amount : this.refs.amount.value,
+      email : this.refs.email.value,
+      password : this.refs.password.value
+    });
   },
     loadCommentsFromServer: function() {
       var amount = this.state.amount;
@@ -53,18 +63,18 @@ var Heading = React.createClass({
                 <h1 className="text-center" ><img src="https://donejs.com/static/img/react-logo.png" /></h1>
               <div className="form-group">
                 <label>How much <span>{amount}</span> </label>
-                <input type="text" className="form-control" placeholder="Amount" value={amount} onChange={this.handleChange} />
+                <input type="text" className="form-control" placeholder="Amount" ref="amount" value={amount} onChange={this.handleChange} />
               </div>
               <p>APR : </p>
               <p>FirstMonth : {firstMonth} </p>
               <p>Total : {totalA}</p>
                 <div className="form-group">
                   <label >Email address</label>
-                  <input type="email" className="form-control" placeholder="Email" />
+                  <input type="email" className="form-control" ref="email" placeholder="Email" onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
                   <label>Password</label>
-                  <input type="password" className="form-control" placeholder="Password" />
+                  <input type="password" className="form-control" ref="password" placeholder="Password" onChange={this.handleChange} />
                 </div>
                 <button type="submit" className="btn btn-success" onClick={this.loadCommentsFromServer} >Submit</button>
                 <hr />
