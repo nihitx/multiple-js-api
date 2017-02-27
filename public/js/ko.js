@@ -1,14 +1,14 @@
 function AppViewModel() {
-  var self = this;
-  self.amount = ko.observable(1000);
-  self.email = ko.observable(null);
-  self.password = ko.observable(null);
-  self.paymentPlan = ko.observableArray();
-  self.firstMonth = ko.observable(0.00);
-  self.paymentPlanCame = ko.observable(false);
+  var masnad = this;
+  masnad.amount = ko.observable(1000);
+  masnad.email = ko.observable(null);
+  masnad.password = ko.observable(null);
+  masnad.paymentPlan = ko.observableArray();
+  masnad.firstMonth = ko.observable(0.00);
+  masnad.paymentPlanCame = ko.observable(false);
 
-  self.information = function() {
-    var x = {"amount" : self.amount()};
+  masnad.information = function() {
+    var x = {"amount" : masnad.amount()};
       $.ajax({
           type: 'GET',
           url: 'http://localhost:3000/getIOT',
@@ -17,13 +17,13 @@ function AppViewModel() {
           data: x
       })
       .done(function(result) {
-        self.paymentPlan([]);
+        masnad.paymentPlan([]);
         $.each(result, function (index, item) {
-                    self.paymentPlan.push(item);
+                    masnad.paymentPlan.push(item);
                 });
-        console.log(self.paymentPlan());
-        self.firstMonth(self.paymentPlan()[0].total_payment_with_fee);
-        self.paymentPlanCame(true);
+        console.log(masnad.paymentPlan());
+        masnad.firstMonth(masnad.paymentPlan()[0].total_payment_with_fee);
+        masnad.paymentPlanCame(true);
       })
       .fail(function(xhr, status, error) {
           console.log(error);
@@ -32,9 +32,9 @@ function AppViewModel() {
       });
   }
 
-  self.totalAmount = ko.computed(function() {
+  masnad.totalAmount = ko.computed(function() {
             var sum = 0;
-            $.each(self.paymentPlan(), function (index, plan) {
+            $.each(masnad.paymentPlan(), function (index, plan) {
                  sum += parseFloat(plan.total_payment_with_fee);
             });
             return sum.toFixed(2);
