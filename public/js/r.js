@@ -11,7 +11,7 @@ var Heading = React.createClass({
       };
   },
   handleChange: function(event){
-    console.log(event);
+    // console.log(event);
     this.setState({
       amount : this.refs.amount.value,
       email : this.refs.email.value,
@@ -58,11 +58,11 @@ var Heading = React.createClass({
           'contentType' : 'application/x-www-form-urlencoded',
         },
       };
-      fetch(`https://react-vs-knockout.herokuapp.com/getstarted?amount=${amount}&email=${email}&password={password}`, value)
+      fetch(`https://react-vs-knockout.herokuapp.com/getstarted?amount=${amount}&email=${email}&password=${password}`, value)
       .then((response) => response.json())
       .then((responseData) =>{
         console.log(responseData);
-         return window.location.href = responseData;
+        return window.location.href = responseData;
       })
       .catch(function(err){
        console.log(err);
