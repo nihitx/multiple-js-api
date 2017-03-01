@@ -11,6 +11,7 @@ var Heading = React.createClass({
       };
   },
   handleChange: function(event){
+    console.log(event);
     this.setState({
       amount : this.refs.amount.value,
       email : this.refs.email.value,
@@ -18,6 +19,7 @@ var Heading = React.createClass({
     });
   },
     loadCommentsFromServer: function() {
+      this.setState({ amount : this.refs.amount.value});
       var amount = this.state.amount;
       var value = {
         method : 'GET' ,
@@ -26,7 +28,7 @@ var Heading = React.createClass({
           'contentType' : 'application/x-www-form-urlencoded',
         },
       };
-        fetch(`https://gentle-oasis-93873.herokuapp.com/getpaymentplan?amount=${amount}`, value)
+        fetch(`https://react-vs-knockout.herokuapp.com/getpaymentplan?amount=${amount}`, value)
         .then((response) => response.json())
         .then((responseData) =>{
           console.log(responseData);
@@ -39,7 +41,7 @@ var Heading = React.createClass({
            Object.keys(this.state.data).map((key,i)=>{
              totalAmount = parseFloat(totalAmount) +  parseFloat(this.state.data[key].total_payment_with_fee);
            });
-           this.setState({totalA : totalAmount})
+           this.setState({totalA : totalAmount.toFixed(2)})
         })
         .catch(function(err){
          console.log(err);
@@ -56,7 +58,7 @@ var Heading = React.createClass({
           'contentType' : 'application/x-www-form-urlencoded',
         },
       };
-      fetch(`https://gentle-oasis-93873.herokuapp.com/getstarted?amount=${amount}&email=${email}&password={password}`, value)
+      fetch(`https://react-vs-knockout.herokuapp.com/getstarted?amount=${amount}&email=${email}&password={password}`, value)
       .then((response) => response.json())
       .then((responseData) =>{
         console.log(responseData);
@@ -80,11 +82,12 @@ var Heading = React.createClass({
                 <h1 className="text-center" ><img src="https://donejs.com/static/img/react-logo.png" /></h1>
               <div className="form-group">
                 <label>How much <span>{amount}</span> </label>
-                <input type="text" className="form-control" placeholder="Amount" ref="amount" value={amount} onChange={this.handleChange} />
+                <input type="text" className="form-control" placeholder="Amount" ref="amount"  onKeyUp={this.loadCommentsFromServer} />
               </div>
               <p>APR : </p>
               <p>FirstMonth : {firstMonth} </p>
               <p>Total : {totalA}</p>
+              { this.state.showtable ? <TableView data={this.state.data} state={this.state.showtable}/> : null }
                 <div className="form-group">
                   <label >Email address</label>
                   <input type="email" className="form-control" ref="email" placeholder="Email" onChange={this.handleChange} />
@@ -93,10 +96,7 @@ var Heading = React.createClass({
                   <label>Password</label>
                   <input type="password" className="form-control" ref="password" placeholder="Password" onChange={this.handleChange} />
                 </div>
-                <button type="submit" className="btn btn-success" onClick={this.loadCommentsFromServer} >Check Plan</button>
                 <button type="submit" className="btn btn-success" onClick={this.getStartedWithAurora} >Get started</button>
-                <hr />
-                { this.state.showtable ? <TableView data={this.state.data} state={this.state.showtable}/> : null }
                 <hr />
                 <a type="submit" className="btn btn-success" href="/">Knockout</a>
                 <a type="submit" className="btn btn-success" href="/react.html">React</a>
@@ -145,9 +145,6 @@ var TableView = React.createClass({
 
 ReactDOM.render(
   <div>
-    <Heading
-    name="React JS"
-    >
-    </Heading>
-    </div>
+    <Heading name="React JS" > </Heading>
+  </div>
 , document.getElementById('reactBinding'));

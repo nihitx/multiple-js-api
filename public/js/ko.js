@@ -7,11 +7,17 @@ function AppViewModel() {
   masnad.firstMonth = ko.observable(0.00);
   masnad.paymentPlanCame = ko.observable(false);
 
+  masnad.delayedValue = ko.pureComputed(masnad.amount)
+  .extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 100 } });
+  masnad.delayedValue.subscribe(function (val) {
+          masnad.amount(val);
+          masnad.information();
+         });
   masnad.information = function() {
     var x = {"amount" : masnad.amount()};
       $.ajax({
           type: 'GET',
-          url: 'https://gentle-oasis-93873.herokuapp.com/getpaymentplan',
+          url: 'https://react-vs-knockout.herokuapp.com/getpaymentplan',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
@@ -47,7 +53,7 @@ function AppViewModel() {
     };
       $.ajax({
           type: 'GET',
-          url: 'https://gentle-oasis-93873.herokuapp.com/getstarted',
+          url: 'https://react-vs-knockout.herokuapp.com/getstarted',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x

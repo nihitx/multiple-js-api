@@ -20,7 +20,7 @@
         <h1 class="text-center"><img src="http://samlents.com/img/knockout.png"/></h1>
         <div class="form-group">
           <label >How much <span data-bind="text : amount"></span></label>
-          <input type="text" class="form-control" placeholder="Amount" data-bind="value : amount">
+          <input type="text" class="form-control" placeholder="Amount" data-bind="textInput : amount">
         </div>
         <p>APR : </p>
         <p>FirstMonth : <span data-bind="text : firstMonth"></span></p>
@@ -34,7 +34,6 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" placeholder="Password" data-bind="value : password">
           </div>
-          <button type="submit" class="btn btn-success" data-bind="click : information">Check Plan</button>
             <button type="submit" class="btn btn-success" data-bind="click : getStarted">Get started</button>
           <div data-bind="visible : paymentPlanCame() == true">
             <table className="table">
