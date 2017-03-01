@@ -17,7 +17,7 @@ function AppViewModel() {
     var x = {"amount" : masnad.amount()};
       $.ajax({
           type: 'GET',
-          url: 'https://react-vs-knockout.herokuapp.com/getpaymentplan',
+          url: 'http://locahost:3000/getpaymentplan',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x
@@ -53,7 +53,7 @@ function AppViewModel() {
     };
       $.ajax({
           type: 'GET',
-          url: 'https://react-vs-knockout.herokuapp.com/getstarted',
+          url: 'http://locahost:3000/getstarted',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
           data: x

@@ -27,7 +27,7 @@ app.get('/getpaymentplan', function (req, res , err) {
           'pass': 'whatstodaysrate',
           'sendImmediately': true
       },
-      url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/getAuroraRate?Amount=${amount}`,
+      url: ``,
       method: 'GET',
     }, function (error, request, body) {
       console.log(body);
@@ -51,7 +51,7 @@ app.get('/getstarted', function (req, res , err) {
           'pass': 'registertoaurorax',
           'sendImmediately': true
       },
-      url: `https://aurorax-rl-staging.herokuapp.com/index.php/auroraxapi/auroraxregister`,
+      url: ``,
       method: 'POST',
       body : JSON.stringify(bodyInfo),
     }, function (error, request, body) {
